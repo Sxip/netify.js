@@ -11,6 +11,10 @@
 
 ### Usage
 
+Note: It is recommended that you create a larger buffer size, so there isn't as many reallocations for a bigger buffer.
+
+The default buffer size is `8,192` bytes however you are free to change to your own size.
+
 **Example** - creating a netify server
 
 ```js
