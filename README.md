@@ -15,7 +15,7 @@
 
 ```bash
 npm i netify.js
-# or "yarn add netify.js"
+# or yarn add netify.js
 ```
 
 ### Usage
