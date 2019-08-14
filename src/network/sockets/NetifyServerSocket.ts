@@ -76,4 +76,19 @@ export interface NetifyServerSocket {
    * Emitted when connection is closed
    */
   on(event: 'close', listener: () => void): this;
+
+  /**
+   * Emitted when connection receives a chuck of data
+   */
+  once(event: 'data', listener: (data: Buffer) => void): this;
+
+  /**
+   * Emitted when connection receives an error
+   */
+  once(event: 'error', listener: (error: Error) => void): this;
+
+  /**
+   * Emitted when connection is closed
+   */
+  once(event: 'close', listener: () => void): this;
 }

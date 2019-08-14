@@ -118,4 +118,14 @@ export interface NetifyServer {
    * Emitted when the server receives an error
    */
   on(event: 'error', listener: (error: Error) => void): this;
+
+  /**
+   * Emitted when the server receives a new connection
+   */
+  once(event: 'connection', listener: (connection: NetifyServerSocket) => void): this;
+
+  /**
+   * Emitted when the server receives an error
+   */
+  once(event: 'error', listener: (error: Error) => void): this;
 }
