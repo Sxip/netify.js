@@ -9,6 +9,15 @@
 * Set the size of the socket data buffer allocation.
 * Async/await.
 
+## Getting Started
+
+### Installation
+
+```bash
+npm i netify.js
+# or "yarn add netify.js"
+```
+
 ### Usage
 
 Note: It is recommended that you create a larger buffer size, so there isn't as many reallocations for a bigger buffer.
