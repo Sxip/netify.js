@@ -1,0 +1,28 @@
+{
+  "name": "netify.js",
+  "description": "Netify is a library created to help create a TCP server or client with delimiter support.",
+  "scripts": {
+    "build": "tsc",
+    "clean": "rimraf build",
+    "prepublishOnly": "npm run clean && npm run build"
+  },
+  "author": "Sxip",
+  "license": "MIT",
+  "homepage": "https://github.com/Sxip/netify.js#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Sxip/netify.js.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Sxip/netify.js/issues"
+  },
+  "devDependencies": {
+    "rimraf": "^2.7.0",
+    "tslint": "^5.18.0",
+    "tslint-microsoft-contrib": "^6.2.0",
+    "typescript": "^3.5.3"
+  },
+  "dependencies": {
+    "@types/node": "^12.7.1"
+  }
+}

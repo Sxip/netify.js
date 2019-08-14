@@ -1,0 +1,8 @@
+# Visual Studio Code configuration
+.vscode/
+
+# Node modules
+node_modules/
+
+# TypeScript build
+build/

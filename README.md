@@ -1,0 +1,67 @@
+# Netify
+
+> <b>Netify</b> is a library created to help create a TCP server or client with delimiter support.
+
+###### What can it do?
+
+* Use delimiter for boundary between data.
+* Automatically increase the socket data buffer allocation size when needed.
+* Set the size of the socket data buffer allocation.
+* Async/await.
+
+### Usage
+
+**Example** - creating a netify server
+
+```js
+(async () => {
+  const netify = new NetifyServer({
+    bufferSize: 1024,
+    delimiter: 0x00,
+    port: 8080,
+  });
+
+  netify.on('connection', async connection => {
+    console.info(`New incoming connection! ${netify.connections.size}`);
+
+    connection.on('data', async data => {
+      console.info(`Received ${data}`);
+    });
+
+    connection.on('close', () => {
+      console.info('Connection closed!');
+    });
+
+    await connection.write('Hello world!');
+    await connection.write('\x00');
+  });
+  
+  await netify.serve();
+})();
+```
+**Example** - creating a netify client
+
+```js
+(async () => {
+  const netify = new NetifyClient({
+    bufferSize: 1024,
+    delimiter: 0x00,
+    host: '127.0.0.1',
+    port: 8080,
+  });
+
+  netify.on('data', data => {
+    console.info(`Received ${data}`);
+  });
+
+  netify.on('close', () => {
+    console.info('Connected closed!');
+  });
+
+  await netify.connect();
+  console.info('Connected to the server!');
+
+  await netify.write('Hello World!');
+  await netify.write('\x00');
+})();
+```

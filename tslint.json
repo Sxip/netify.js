@@ -1,0 +1,21 @@
+{
+  "extends": [
+    "tslint:recommended",
+    "tslint-microsoft-contrib/latest"
+  ],
+  "rules": {
+    "no-parameter-properties": false,
+    "no-relative-imports": false,
+    "completed-docs": false,
+    "curly": [
+      true,
+      "as-needed"
+    ],
+    "quotemark": [
+      true,
+      "single",
+      "avoid-escape",
+      "avoid-template"
+    ]
+  }
+}
