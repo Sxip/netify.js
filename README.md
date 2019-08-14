@@ -1,6 +1,6 @@
 # Netify
 
-> <b>Netify</b> is a library created to help create a TCP server or client with delimiter support.
+> <b>Netify</b> is a [Node.js](https://nodejs.org/) module that allows you to easily create a TCP server and client.
 
 ###### What can it do?
 
