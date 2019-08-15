@@ -1,6 +1,6 @@
 {
   "name": "netify.js",
-  "description": "Netify is a library created to help create a TCP server or client with delimiter support.",
+  "description": "Netify is a Node.js module that allows you to easily create a TCP server and client.",
   "version": "0.0.5",
   "scripts": {
     "build": "tsc",
