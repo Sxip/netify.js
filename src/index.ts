@@ -1,4 +1,4 @@
-export * from './network/NetifyServer';
-export * from './network/NetifyClient';
+export * from './NetifyServer';
+export * from './NetifyClient';
 
 export * from './network/sockets/NetifyServerSocket';

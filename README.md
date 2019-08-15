@@ -4,10 +4,9 @@
 
 ###### What can it do?
 
-* Use delimiter for boundary between data.
-* Automatically increase the socket data buffer allocation size when needed.
-* Set the size of the socket data buffer allocation.
-* Async/await.
+* ✂️ Use delimiter for boundary between data.
+* ⚙️ Set the size of the socket data buffer allocation.
+* ✨ Automatically increase the socket data buffer allocation size when needed.
 
 ## Getting Started
 

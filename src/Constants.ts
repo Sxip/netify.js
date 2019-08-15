@@ -4,8 +4,7 @@
 
 // tslint:disable-next-line: export-name
 export const defaultOptions = {
-  bufferResize: false,
+  bufferResize: true,
   bufferSize: 1024 * 8,
   delimiter: 0x00,
-  port: 0,
 };

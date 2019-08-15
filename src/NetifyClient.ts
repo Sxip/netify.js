@@ -1,12 +1,12 @@
-import { defaultOptions } from '../Constants';
-import { NetifyDelimiterPipe } from './NetifyDelimiterPipe';
-import { SocketHandler } from './sockets/SocketHandler';
-import { ISocketOptions } from './sockets/SocketOptions';
+import { defaultOptions } from './Constants';
+import { NetifyDelimiterPipe } from './network/NetifyDelimiterPipe';
+import { SocketHandler } from './network/sockets/SocketHandler';
+import { ISocketOptions } from './network/sockets/SocketOptions';
 
 /**
- * The options of this server
+ * The options of this client
  */
-interface INetifyServerOptions extends ISocketOptions {
+interface INetifyClientOptions extends ISocketOptions {
   /**
    * Listening port of this server
    */
@@ -19,8 +19,11 @@ interface INetifyServerOptions extends ISocketOptions {
 }
 
 export class NetifyClient extends SocketHandler {
+  /**
+   * @param [options] Options of this client
+   */
   public constructor(
-    private readonly options: INetifyServerOptions,
+    private readonly options: INetifyClientOptions,
   ) {
     super();
 

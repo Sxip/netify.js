@@ -1,13 +1,13 @@
 import { Socket } from 'net';
+import { NetifyServer } from '../../NetifyServer';
 import { NetifyConnectionManager } from '../NetifyConnectionManager';
 import { NetifyDelimiterPipe } from '../NetifyDelimiterPipe';
-import { NetifyServer } from '../NetifyServer';
 import { SocketHandler } from './SocketHandler';
 
 export class NetifyServerSocket extends SocketHandler {
   /**
-   * @param manager The manager that instantiated this client
-   * @param socket The socket that instantiated this client
+   * @param manager The manager that instantiated this socket
+   * @param socket The socket that instantiated this socket
    */
   public constructor(
     private readonly manager: NetifyConnectionManager,
@@ -17,9 +17,9 @@ export class NetifyServerSocket extends SocketHandler {
     super(socket);
 
     this.stream = new NetifyDelimiterPipe(
-      this.manager.server.options.delimiter,
-      this.manager.server.options.bufferSize,
-      this.manager.server.options.bufferResize,
+      this.server.options.delimiter,
+      this.server.options.bufferSize,
+      this.server.options.bufferResize,
     );
 
     this.socket.pipe(this.stream);
@@ -56,6 +56,8 @@ export class NetifyServerSocket extends SocketHandler {
    */
   protected onClose(): void {
     this.emit('close');
+
+    this.dispose();
     this.manager.deleteConnection(this);
   }
 }

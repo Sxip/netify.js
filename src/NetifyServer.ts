@@ -1,9 +1,9 @@
 import { EventEmitter } from 'events';
 import { Server } from 'net';
-import { defaultOptions } from '../Constants';
-import { NetifyConnectionManager } from './NetifyConnectionManager';
-import { NetifyServerSocket } from './sockets/NetifyServerSocket';
-import { ISocketOptions } from './sockets/SocketOptions';
+import { defaultOptions } from './Constants';
+import { NetifyConnectionManager } from './network/NetifyConnectionManager';
+import { NetifyServerSocket } from './network/sockets/NetifyServerSocket';
+import { ISocketOptions } from './network/sockets/SocketOptions';
 
 /**
  * The options of this server
@@ -12,7 +12,7 @@ interface INetifyServerOptions extends ISocketOptions {
   /**
    * Listening port of this server
    */
-  port?: number;
+  port: number;
 
   /**
    * Host of this server
@@ -34,7 +34,9 @@ export class NetifyServer extends EventEmitter {
   /**
    * @param [options] Options of this server
    */
-  public constructor(public readonly options: INetifyServerOptions) {
+  public constructor(
+    public readonly options: INetifyServerOptions,
+  ) {
     super();
 
     this.options = { ...defaultOptions, ...options };

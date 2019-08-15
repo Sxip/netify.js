@@ -1,17 +1,19 @@
 import { Socket } from 'net';
-import { NetifyServer } from './NetifyServer';
+import { NetifyServer } from '../NetifyServer';
 import { NetifyServerSocket } from './sockets/NetifyServerSocket';
 
 export class NetifyConnectionManager {
   /**
-   * Holds the amount of connected connections of this server
+   * Holds the amount of connected connections
    */
   public readonly connections: Set<NetifyServerSocket> = new Set();
 
   /**
    * @param server The server that instantiated this connection manager
    */
-  public constructor(public readonly server: NetifyServer) { }
+  public constructor(
+    public readonly server: NetifyServer,
+  ) { }
 
   /**
    * Handles connection event
