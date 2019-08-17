@@ -1,5 +1,7 @@
 # Netify
 
+<img src="https://raw.githubusercontent.com/Sxip/netify.js/master/assets/Netify.png" align="right">
+
 [![NPM netify.js package](https://img.shields.io/npm/v/netify.js.svg?style=flat&color=brightgreen)](https://npmjs.org/package/netify.js) [![NPM neitfy downloads](https://img.shields.io/npm/dw/netify.js)](https://npmjs.org/package/netify.js) [![NPM neitfy license](https://img.shields.io/npm/l/netify.js)](https://npmjs.org/package/netify.js)
 
 > <b>Netify</b> is a [Node.js](https://nodejs.org/) module that allows you to easily create a TCP server and client.
@@ -38,7 +40,7 @@ The default buffer size is `8,192` bytes however you are free to change to your 
   netify.on('connection', async connection => {
     console.info(`New incoming connection! ${netify.connections.size}`);
 
-    connection.on('data', async data => {
+    connection.on('data', data => {
       console.info(`Received ${data}`);
     });
 
