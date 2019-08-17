@@ -1,6 +1,6 @@
 # Netify
 
-[![NPM netify.js package](https://img.shields.io/npm/v/netify.js.svg?style=flat)](https://npmjs.org/package/netify.js) [![NPM neitfy downloads](https://img.shields.io/npm/dw/netify.js)](https://npmjs.org/package/netify.js) [![NPM neitfy license](https://img.shields.io/npm/l/netify.js)](https://npmjs.org/package/netify.js)
+[![NPM netify.js package](https://img.shields.io/npm/v/netify.js.svg?style=flat&color=brightgreen)](https://npmjs.org/package/netify.js) [![NPM neitfy downloads](https://img.shields.io/npm/dw/netify.js)](https://npmjs.org/package/netify.js) [![NPM neitfy license](https://img.shields.io/npm/l/netify.js)](https://npmjs.org/package/netify.js)
 
 > <b>Netify</b> is a [Node.js](https://nodejs.org/) module that allows you to easily create a TCP server and client.
 
