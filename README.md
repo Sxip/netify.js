@@ -1,16 +1,24 @@
-# Netify
+<div align="center">
+  <br />
+  <p>
+    <a href="#"><img src="https://raw.githubusercontent.com/Sxip/netify.js/master/assets/Netify.png" width="150" alt="Netify.js" /></a>
+  </p>
+  <br />
+  <p>
+    <a href="https://www.npmjs.com/package/netify.js"><img src="https://img.shields.io/npm/v/netify.js.svg?style=flat&color=brightgreen" alt="NPM version" /></a>
+    <a href="https://www.npmjs.com/package/netify.js"><img src="https://img.shields.io/npm/dw/netify.js" alt="NPM downloads" /></a>
+    <a href="#"><img src="https://img.shields.io/npm/l/netify.js" alt="Neitfy license" /></a>
+  </p>
+</div>
 
-<img src="https://raw.githubusercontent.com/Sxip/netify.js/master/assets/Netify.png" align="right">
+## About
 
-[![NPM netify.js package](https://img.shields.io/npm/v/netify.js.svg?style=flat&color=brightgreen)](https://npmjs.org/package/netify.js) [![NPM neitfy downloads](https://img.shields.io/npm/dw/netify.js)](https://npmjs.org/package/netify.js) [![NPM neitfy license](https://img.shields.io/npm/l/netify.js)](https://npmjs.org/package/netify.js)
+<b>Netify</b> is a [Node.js](https://nodejs.org/) module that allows you to easily create a TCP server and client.
 
-> <b>Netify</b> is a [Node.js](https://nodejs.org/) module that allows you to easily create a TCP server and client.
-
-###### What can it do?
-
-* ✂️ Use delimiter for boundary between data.
-* ⚙️ Set the size of the socket data buffer allocation.
-* ✨ Automatically increase the socket data buffer allocation size when needed.
+* 🔧 Ability to create your own protocol.
+* ⚙️ Optional prebuild protocols.
+* 🔥 Promise based (async/await).
+* ⚡️ Performant.
 
 ## Getting Started
 
@@ -23,61 +31,65 @@ npm i netify.js
 
 ### Usage
 
-Note: It is recommended that you create a larger buffer size, so there isn't as many reallocations for a bigger buffer.
-
-The default buffer size is `8,192` bytes however you are free to change to your own size.
+Note: Before creating a server or client, you need define the protocol.
 
 **Example** - creating a netify server
 
 ```js
+const { NetifyClient, protocol: { NullProtocol } } = require('netify.js');
+
 (async () => {
   const netify = new NetifyServer({
-    bufferSize: 1024,
-    delimiter: 0x00,
     port: 8080,
-  });
+  }).useProtocol(NullProtocol);
 
   netify.on('connection', async connection => {
-    console.info(`New incoming connection! ${netify.connections.size}`);
+    console.info(`New connection!`);
 
-    connection.on('data', data => {
-      console.info(`Received ${data}`);
+    // Writes to the writer buffer
+    connection.protocol.write('Hello, client!');
+    connection.protocol.write('\x00');
+
+    // Sends to the connection
+    await connection.protocol.flush();
+
+    connection.on('received', message => {
+      console.info(`Recieved ${message}`);
     });
 
     connection.on('close', () => {
-      console.info('Connection closed!');
+      console.warn(`Connection closed!`);
     });
-
-    await connection.write('Hello world!');
-    await connection.write('\x00');
   });
-  
+
   await netify.serve();
+  console.log('Listening!');
 })();
 ```
 **Example** - creating a netify client
 
 ```js
+const { NetifyClient, protocol: { NullProtocol } } = require('netify.js');
+
 (async () => {
   const netify = new NetifyClient({
-    bufferSize: 1024,
-    delimiter: 0x00,
     host: '127.0.0.1',
     port: 8080,
-  });
+  }).useProtocol(NullProtocol);
 
-  netify.on('data', data => {
-    console.info(`Received ${data}`);
-  });
-
-  netify.on('close', () => {
-    console.info('Connected closed!');
+  netify.on('received', message => {
+    console.info(`Recieved ${message}`);
   });
 
   await netify.connect();
-  console.info('Connected to the server!');
+  console.log('Connected!');
 
-  await netify.write('Hello World!');
-  await netify.write('\x00');
+  // Writes to the writer buffer
+  netify.protocol.write('Hello, server!');
+  netify.protocol.write('\x00');
+
+  // Sends to the server
+  await netify.protocol.flush();
 })();
 ```
+

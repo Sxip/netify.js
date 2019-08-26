@@ -1,0 +1,124 @@
+const { EventEmitter } = require('events');
+const { Server } = require('net');
+const ConnectionManager = require('./network/ConnectionManager');
+const Protocol = require('./network/protocol/Base');
+
+class NetifyServer extends EventEmitter {
+  constructor(options = {}) {
+    if (!options.port) throw new Error('No port has been specified.');
+    super();
+
+    /**
+     * The options the server was instantiated with
+     * @type {NetifyOptions}
+     * @public
+     */
+    this.options = options;
+
+    /**
+     * The internal net.Server instance
+     * @type {?net.Server}
+     * @public
+     */
+    this._server = null;
+
+    /**
+     * The connection manager of this server
+     * @type {ConnectionManager}
+     * @private
+     */
+    this._connectionManager = new ConnectionManager(this);
+
+    /**
+     * The protocol of this server
+     * @type {object}
+     * @private
+     */
+    this._netifyProtocol = null;
+  }
+
+  /**
+   * Getter for the protocol handler object
+   * @readonly
+   */
+  get netifyProtocol() {
+    return this._netifyProtocol;
+  }
+
+
+  /**
+   * Getter for the connected connections
+   * @readonly
+   */
+  get connections() {
+    return this._connectionManager.connections;
+  }
+
+  /**
+   * Sets the protocol handler
+   * @param {Protocol} handler The protocol handler
+   * @param {Object} options The protocol handler options
+   * @returns {this}
+   * @public
+   */
+  useProtocol(handler, options = {}) {
+    if (!(handler.prototype instanceof Protocol)) throw new Error('Invalid protocol handler.');
+    if (typeof options !== 'object') throw new TypeError('Options must be a typeof object.');
+
+    this._netifyProtocol = { Handler: handler, options };
+    return this;
+  }
+
+  /**
+   * Create socket and begin listening for new connections
+   * @returns {Promise<void>}
+   * @public
+   */
+  async serve() {
+    await new Promise((resolve, reject) => {
+      if (this._server) reject(new Error('The server has already been instantiated.'));
+      if (!this._netifyProtocol.Handler) reject(new Error('No protocol has been set.'));
+
+      this._server = new Server();
+
+      const dispose = () => {
+        this._server.off('listening', onceListening);
+        this._server.off('error', onceError);
+        this._server.off('close', onceClose);
+      };
+
+      const onceListening = () => {
+        resolve();
+      };
+
+      const onceClose = error => {
+        dispose();
+        reject(error);
+      };
+
+      const onceError = () => {
+        dispose();
+      };
+
+      this._server.once('listening', onceListening);
+      this._server.once('error', onceError);
+
+      const { host, port } = this.options;
+      this._server.listen({ host, port });
+    });
+
+    this._server.on('connection', socket => this._connectionManager.onConnection(socket));
+    this._server.on('error', this.onError.bind(this));
+  }
+
+  /**
+   * Handles server error event
+   * @param {Error} error The error received
+   * @public
+   */
+  onError(error) {
+    this.emit('error', error);
+  }
+}
+
+module.exports = NetifyServer;

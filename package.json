@@ -2,13 +2,8 @@
   "name": "netify.js",
   "description": "Netify is a Node.js module that allows you to easily create a TCP server and client.",
   "version": "0.0.5",
-  "scripts": {
-    "build": "tsc",
-    "clean": "rimraf build",
-    "prepublishOnly": "npm run clean && npm run build"
-  },
-  "main": "build/index.js",
-  "types": "build/index.d.ts",
+  "scripts": {},
+  "main": "src/index.js",
   "author": "Sxip",
   "license": "MIT",
   "homepage": "https://github.com/Sxip/netify.js#readme",
@@ -22,14 +17,10 @@
   "keywords": [
     "node",
     "server",
-    "client",
-    "delimiter"
+    "client"
   ],
   "devDependencies": {
-    "rimraf": "^2.7.0",
-    "tslint": "^5.18.0",
-    "tslint-microsoft-contrib": "^6.2.0",
-    "typescript": "^3.5.3"
+    "eslint": "^6.2.2"
   },
   "dependencies": {
     "@types/node": "^12.7.1"
