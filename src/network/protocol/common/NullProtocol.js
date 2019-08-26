@@ -1,4 +1,4 @@
-const Protocol = require('../Base');
+const Protocol = require('../Protocol');
 
 class NullProtocol extends Protocol {
   constructor({ readBufferSize, writeBufferSize } = {}) {

@@ -1,4 +1,4 @@
-const Protocol = require('../Base');
+const Protocol = require('../Protocol');
 
 class DelimiterProtocol extends Protocol {
   constructor({ readBufferSize, writeBufferSize, delimiter } = {}) {
@@ -22,11 +22,11 @@ class DelimiterProtocol extends Protocol {
     */
   chunk() {
     do {
-      const message = this.readBuffer.readUntil(this._delimiter);
+      const message = this.reader.readUntil(this._delimiter);
       if (message === null) break;
 
       this.push(message);
-    } while (this.readBuffer.length);
+    } while (this.reader.length);
 
     if (!this.reader.length) this.reader.reset();
     else if (this.reader.capacity / 2 < this.reader.offset) this.reader.drain();

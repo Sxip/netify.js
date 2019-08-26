@@ -57,13 +57,6 @@ class ByteBuffer {
     return this._buffer;
   }
 
-  indexOf(value) {
-    let index = this._buffer.indexOf(value, this._offset);
-    index = index < this._end ? index - this._offset : -1;
-
-    return index;
-  }
-
   reset() {
     this._offset = 0;
     this._end = 0;

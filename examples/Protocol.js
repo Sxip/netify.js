@@ -1,4 +1,4 @@
-const Protocol = require('../src/network/protocol/Base');
+const Protocol = require('../src/network/protocol/Protocol');
 
 class ExampleProtocol extends Protocol {
   constructor({ readBufferSize = 200, writeBufferSize = 200 } = {}) {

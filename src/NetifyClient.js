@@ -13,13 +13,6 @@ class NetifyClient extends NetifySocket {
      * @public
      */
     this.options = options;
-
-    /**
-     * The protocol of this server
-     * @type {object}
-     * @private
-     */
-    this._netifyProtocol = null;
   }
 
   /**

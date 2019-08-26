@@ -14,9 +14,9 @@ const { NetifyClient, protocol: { NullProtocol } } = require('../src');
   console.log('Connected!');
 
   // Writes to the writer buffer
-  netify.protocol.write('Hello, server!');
-  netify.protocol.write('\x00');
+  netify.write('Hello, server!');
+  netify.write('\x00');
 
   // Sends to the server
-  await netify.protocol.flush();
+  await netify.flush();
 })();

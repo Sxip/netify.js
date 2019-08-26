@@ -9,11 +9,11 @@ const { NetifyServer, protocol: { NullProtocol } } = require('../src');
     console.info(`New connection!`);
 
     // Writes to the writer buffer
-    connection.protocol.write('Hello, client!');
-    connection.protocol.write('\x00');
+    connection.write('Hello, client!');
+    connection.write('\x00');
 
     // Sends to the connection
-    await connection.protocol.flush();
+    await connection.flush();
 
     connection.on('received', message => {
       console.info(`Recieved ${message}`);

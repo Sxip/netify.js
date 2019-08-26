@@ -21,6 +21,24 @@ class NetifySocket extends EventEmitter {
   }
 
   /**
+   * Shorthand helper method for the protocol write
+   * @param {string|Buffer} message The message to write
+   * @public
+   */
+  write(message) {
+    this.protocol.write(message);
+  }
+
+  /**
+   * Shorthand helper method for the protocol flush
+   * @returns {Promise<number>}
+   * @public
+   */
+  flush() {
+    return this.protocol.flush();
+  }
+
+  /**
    * Handles setting the protocol of this netify socket
    * @returns {this}
    * @public
@@ -130,6 +148,7 @@ class NetifySocket extends EventEmitter {
   /**
    * Handles error event
    * @param {Error} error Error
+   * @protected
    */
   onError(error) {
     this.emit('error', error);

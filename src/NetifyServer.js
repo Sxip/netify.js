@@ -64,6 +64,7 @@ class NetifyServer extends EventEmitter {
   useProtocol(handler, options = {}) {
     if (!(handler.prototype instanceof Protocol)) throw new Error('Invalid protocol handler.');
     if (typeof options !== 'object') throw new TypeError('Options must be a typeof object.');
+    if (!handler) throw new Error('No handler has been specified.');
 
     this._netifyProtocol = { Handler: handler, options };
     return this;
