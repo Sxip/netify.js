@@ -17,7 +17,6 @@
 
 * 🔧 Ability to create your own protocol.
 * ⚙️ Optional prebuild protocols.
-* 🔥 Promise based (async/await).
 * ⚡️ Performant.
 
 ## Getting Started
