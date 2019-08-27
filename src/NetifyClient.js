@@ -1,5 +1,5 @@
 const NetifySocket = require('./network/sockets/NetifySocket');
-const Protocol = require('./network/protocol/Base');
+const Protocol = require('./network/protocol/Protocol');
 
 class NetifyClient extends NetifySocket {
   constructor(options = {}) {

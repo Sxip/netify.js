@@ -15,8 +15,8 @@
 
 <b>Netify</b> is a [Node.js](https://nodejs.org/) module that allows you to easily create a TCP server and client.
 
-* 🔧 Ability to create your own protocol.
-* ⚙️ Optional prebuild protocols.
+* ⚙️ Create your own protocol.
+* 🔥 Promise based.
 * ⚡️ Performant.
 
 ## Getting Started
@@ -30,27 +30,26 @@ npm i netify.js
 
 ### Usage
 
-Note: Before creating a server or client, you need define the protocol.
+Note: Before creating a server or client, you must define your own protocol or use a premade one.
 
 **Example** - creating a netify server
 
 ```js
-const { NetifyClient, protocol: { NullProtocol } } = require('netify.js');
+const { NetifyClient, Protocol: { Null } } = require('netify.js');
 
 (async () => {
   const netify = new NetifyServer({
     port: 8080,
-  }).useProtocol(NullProtocol);
+  }).useProtocol(Null);
 
   netify.on('connection', async connection => {
     console.info(`New connection!`);
 
-    // Writes to the writer buffer
-    connection.protocol.write('Hello, client!');
-    connection.protocol.write('\x00');
+    connection.write('Hello, client!');
+    connection.write('\x00');
 
     // Sends to the connection
-    await connection.protocol.flush();
+    await connection.flush();
 
     connection.on('received', message => {
       console.info(`Recieved ${message}`);
@@ -68,13 +67,13 @@ const { NetifyClient, protocol: { NullProtocol } } = require('netify.js');
 **Example** - creating a netify client
 
 ```js
-const { NetifyClient, protocol: { NullProtocol } } = require('netify.js');
+const { NetifyClient, Protocol: { Null } } = require('netify.js');
 
 (async () => {
   const netify = new NetifyClient({
     host: '127.0.0.1',
     port: 8080,
-  }).useProtocol(NullProtocol);
+  }).useProtocol(Null);
 
   netify.on('received', message => {
     console.info(`Recieved ${message}`);
@@ -83,12 +82,10 @@ const { NetifyClient, protocol: { NullProtocol } } = require('netify.js');
   await netify.connect();
   console.log('Connected!');
 
-  // Writes to the writer buffer
-  netify.protocol.write('Hello, server!');
-  netify.protocol.write('\x00');
+  netify.write('Hello, server!');
+  netify.write('\x00');
 
   // Sends to the server
-  await netify.protocol.flush();
+  await netify.flush();
 })();
 ```
-

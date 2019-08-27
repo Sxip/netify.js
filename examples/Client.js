@@ -1,10 +1,10 @@
-const { NetifyClient, protocol: { NullProtocol } } = require('../src');
+const { NetifyClient, Protocol: { Null } } = require('../src');
 
 (async () => {
   const netify = new NetifyClient({
     host: '127.0.0.1',
     port: 8080,
-  }).useProtocol(NullProtocol);
+  }).useProtocol(Null);
 
   netify.on('received', message => {
     console.info(`Recieved ${message}`);

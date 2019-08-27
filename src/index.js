@@ -10,7 +10,7 @@ module.exports = {
   NetifyClient: require('./NetifyClient'),
 
   /**
-   * @returns {object}
+   * @returns {any}
    */
-  protocol: require('./network/protocol'),
+  Protocol: require('./network/protocol'),
 };

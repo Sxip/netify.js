@@ -14,10 +14,8 @@ class ChunkProtocol extends Protocol {
     * @abstract
     */
   chunk(bytes) {
-    do {
-      const message = this.reader.read(bytes);
-      this.push(message);
-    } while (this.reader.length);
+    const message = this.reader.read(bytes);
+    this.push(message);
 
     if (!this.reader.length) this.reader.reset();
   }

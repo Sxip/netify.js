@@ -1,9 +1,9 @@
-const { NetifyServer, protocol: { NullProtocol } } = require('../src');
+const { NetifyServer, Protocol: { Null } } = require('../src');
 
 (async () => {
   const netify = new NetifyServer({
     port: 8080,
-  }).useProtocol(NullProtocol);
+  }).useProtocol(Null);
 
   netify.on('connection', async connection => {
     console.info(`New connection!`);

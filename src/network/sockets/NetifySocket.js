@@ -85,14 +85,19 @@ class NetifySocket extends EventEmitter {
   * @private
   */
   _writeSocketBuffer(data) {
+    // eslint-disable-next-line consistent-return
     return new Promise((resolve, reject) => {
-      if (!this.socket.writable || this.socket.destroyed) {
-        reject(new Error('Failed to write after end!'));
-      }
+      if (!this.socket.writable || this.socket.destroyed) reject(new Error('Failed to write after end!'));
 
-      const onceError = error => {
-        reject(error);
+      const onceError = err => {
+        this._rejected = true;
+        reject(err);
       };
+
+      if (this.socket.write(data)) {
+        this.socket.off('error', onceError);
+        if (!this._rejected) return resolve(data.length);
+      }
 
       const onceDrain = () => {
         this.socket.off('close', onceClose);
@@ -106,14 +111,9 @@ class NetifySocket extends EventEmitter {
         resolve(data.length);
       };
 
-      if (this.socket.write(data)) {
-        this.socket.off('error', onceError);
-        resolve(data.length);
-      }
-
+      this.socket.once('error', onceError);
       this.socket.once('close', onceClose);
       this.socket.once('drain', onceDrain);
-      this.socket.once('error', onceError);
     });
   }
 
