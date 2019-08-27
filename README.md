@@ -79,6 +79,10 @@ const { NetifyClient, Protocol: { Null } } = require('netify.js');
     console.info(`Recieved ${message}`);
   });
 
+  netify.on('close', () => {
+    console.warn(`Connection closed!`);
+  });
+
   await netify.connect();
   console.log('Connected!');
 
@@ -88,4 +92,34 @@ const { NetifyClient, Protocol: { Null } } = require('netify.js');
   // Sends to the server
   await netify.flush();
 })();
+```
+
+### Protocol
+
+**Netify** comes with premade protocols however, you have the option to extend the protocol `base` class and create your own protocol to fit your needs.
+
+**Example** - Creating your own protocol class
+
+```js
+const { Protocol: { Base } } = require('netify.js');
+
+class ExampleProtocol extends Base {
+  constructor({ readBufferSize = 200, writeBufferSize = 200 } = {}) {
+    super({
+      readBufferSize,
+      writeBufferSize,
+    });
+  }
+
+  /**
+   * Handles your data
+   */
+  chunk(bytes) {
+    
+    // Emits the data to the connection
+    this.push('Hello, World!');
+  }
+}
+
+module.exports = ExampleProtocol;
 ```

@@ -45,13 +45,31 @@ class NetifyServer extends EventEmitter {
     return this._netifyProtocol;
   }
 
-
   /**
    * Getter for the connected connections
    * @readonly
    */
   get connections() {
     return this._connectionManager.connections;
+  }
+
+  /**
+   * Broadcasts a message to all connected connections
+   * @param {string|Buffer} message The message to broadcast
+   * @returns {Promise<any[]>}
+   * @public
+   */
+  broadcast(message) {
+    return this._connectionManager.broadcast(message);
+  }
+
+  /**
+  * Closes all of the connected connections
+  * @returns {Promise<any[]>}
+  * @puiblic
+  */
+  closeConnections() {
+    return this._connectionManager.closeConnections();
   }
 
   /**
@@ -119,6 +137,22 @@ class NetifyServer extends EventEmitter {
    */
   onError(error) {
     this.emit('error', error);
+  }
+
+  /**
+   * Disconnect the server
+   * @public
+   */
+  async close() {
+    await this.closeConnections();
+
+    await new Promise((resolve, reject) => {
+      this._server.close(error => {
+        if (error) reject(error);
+        else resolve();
+      });
+    });
+    this.emit('close');
   }
 }
 

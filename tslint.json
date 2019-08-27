@@ -1,0 +1,48 @@
+{
+  "extends": [
+    "tslint-config-typings"
+  ],
+  "rules": {
+    "class-name": true,
+    "indent": [
+      true,
+      "spaces",
+      2
+    ],
+    "member-ordering": [
+      true,
+      {
+        "order": [
+          "constructor",
+          "instance-field",
+          "instance-method",
+          "static-field",
+          "static-method"
+        ]
+      }
+    ],
+    "quotemark": [
+      true,
+      "single"
+    ],
+    "semicolon": [
+      true,
+      "always"
+    ],
+    "variable-name": [
+      true,
+      "check-format",
+      "allow-pascal-case",
+      "allow-leading-underscore",
+      "allow-trailing-underscore"
+    ],
+    "whitespace": [
+      true,
+      "check-branch",
+      "check-decl",
+      "check-operator",
+      "check-separator",
+      "check-type"
+    ]
+  }
+}

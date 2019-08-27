@@ -10,6 +10,10 @@ const { NetifyClient, Protocol: { Null } } = require('../src');
     console.info(`Recieved ${message}`);
   });
 
+  netify.on('close', () => {
+    console.log('Connection closed!');
+  });
+
   await netify.connect();
   console.log('Connected!');
 

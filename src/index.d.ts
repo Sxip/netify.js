@@ -1,6 +1,6 @@
 declare module 'netify.js' {
-  import { EventEmitter } from "events";
-  import { Socket, TcpSocketConnectOpts } from "net";
+  import { EventEmitter } from 'events';
+  import { Socket, TcpSocketConnectOpts } from 'net';
 
   export interface NetifyServerOptions {
     host?: string;
@@ -20,14 +20,20 @@ declare module 'netify.js' {
   export class NetifyServer extends EventEmitter {
     public constructor(options: NetifyServerOptions);
 
-    public get connections(): Set<ServerSocket>;
+    public connections: Set<ServerSocket>;
 
     public useProtocol(handler: Protocol, options?: Object): void;
+    public broadcast(message: string | Buffer): Promise<number[]>
+    public closeConnections(): Promise<any[]>;
+    public close(): Promise<void>;
     public serve(): Promise<void>;
 
     public on(event: 'connection', listener: (connection: NetifySocket) => any): this;
     public on(event: 'error', listener: (error: Error) => any): this;
+    public on(event: 'close', listener: () => any): this;
   }
+
+  export class ServerSocket extends NetifySocket { }
 
   export class NetifySocket extends EventEmitter {
     public constructor(socket: Socket);
@@ -55,18 +61,18 @@ declare module 'netify.js' {
   export class ByteBuffer {
     public constructor(size?: number);
 
-    public get offset(): number;
-    public set offset(value: number): number;
+    public offset(): number;
+    public offset(value: number): number;
 
-    public get end(): number;
-    public set end(value: number): number;
+    public end(): number;
+    public end(value: number): number;
 
-    public get length(): number;
-    public set length(value: number): number;
+    public length(): number;
+    public length(value: number): number;
 
-    public get capacity(): number;
-    public get buffer(): Buffer;
-    public get fullBuffer(): Buffer;
+    public capacity(): number;
+    public buffer(): Buffer;
+    public fullBuffer(): Buffer;
 
     public indexOf(value: any): number;
     public contains(value: any): number;
@@ -133,8 +139,8 @@ declare module 'netify.js' {
   export abstract class Protocol {
     public constructor(options: ProtocolOptions);
 
-    public get reader(): ByteBuffer;
-    public get writer(): ByteBuffer;
+    public reader: ByteBuffer;
+    public writer: ByteBuffer;
 
     public write(message: string | Buffer): void;
     public flush(): Promise<number>;

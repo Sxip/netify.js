@@ -18,8 +18,8 @@ class DelimiterProtocol extends Protocol {
   }
 
   /**
-    * Handles the socket data chunks
-    */
+   * Handles the socket data chunks
+   */
   chunk() {
     do {
       const message = this.reader.readUntil(this._delimiter);

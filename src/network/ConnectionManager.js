@@ -3,18 +3,50 @@ const ServerSocket = require('./sockets/ServerSocket');
 class ConnectionManager {
   constructor(server) {
     /**
-   * The server that instantiated this connection manager
-   * @type {NetifyServer}
-   * @readonly
-   */
+     * The server that instantiated this connection manager
+     * @type {NetifyServer}
+     * @readonly
+     */
     Object.defineProperty(this, 'server', { value: server });
 
     /**
-    * Holds the amount of connected connections
-    * @type {Map<ServerSocket>}
-    * @private
-    */
+     * Holds the amount of connected connections
+     * @type {Map<ServerSocket>}
+     * @private
+     */
     this._connections = new Set();
+  }
+
+  /**
+   * Broadcasts a message to all connected connections
+   * @param {string|Buffer} message The message to broadcast
+   * @returns {Promise<number[]>}
+   * @public
+   */
+  broadcast(message) {
+    const promises = [];
+
+    for (const connection of this._connections) {
+      promises.push((() => {
+        connection.write(message);
+        return connection.flush();
+      })());
+    }
+    return Promise.all(promises);
+  }
+
+  /**
+   * Closes all of the connected connections
+   * @returns {Promise<any[]>}
+   * @puiblic
+   */
+  closeConnections() {
+    const promises = [];
+
+    for (const connection of this._connections) {
+      promises.push(connection.destroy());
+    }
+    return Promise.all(promises);
   }
 
   /**

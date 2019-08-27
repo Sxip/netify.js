@@ -128,6 +128,16 @@ class NetifySocket extends EventEmitter {
   }
 
   /**
+   * Destroys the socket connection
+   * @returns {Promise<void>}
+   */
+  destroy() {
+    return new Promise(resolve => {
+      if (!this.socket.destroyed) resolve(this.socket.destroy());
+    });
+  }
+
+  /**
    * Handles socket event
    * @public
    */
