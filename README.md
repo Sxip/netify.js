@@ -96,7 +96,7 @@ const { NetifyClient, Protocol: { Null } } = require('netify.js');
 
 ### Protocol
 
-**Netify** comes with the follow premade protocols.
+**Netify** comes with the following premade protocols.
 
 * Delimiter  
   Used for delimiter based data
