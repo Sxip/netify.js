@@ -17,5 +17,5 @@ module.exports = {
   /**
    * @returns {Protocol}
    */
-  Base: require('./Protocol'),
+  Base: require('./Base'),
 };

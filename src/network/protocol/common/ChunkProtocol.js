@@ -1,4 +1,4 @@
-const Protocol = require('../Protocol');
+const Protocol = require('../Base');
 
 class ChunkProtocol extends Protocol {
   constructor({ readBufferSize, writeBufferSize } = {}) {

@@ -1,4 +1,4 @@
-const Protocol = require('../Protocol');
+const Protocol = require('../Base');
 
 class DelimiterProtocol extends Protocol {
   constructor({ readBufferSize, writeBufferSize, delimiter } = {}) {

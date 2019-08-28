@@ -1,7 +1,7 @@
 const { EventEmitter } = require('events');
 const { Server } = require('net');
 const ConnectionManager = require('./network/ConnectionManager');
-const Protocol = require('./network/protocol/Protocol');
+const Protocol = require('./network/protocol/Base');
 
 class NetifyServer extends EventEmitter {
   constructor(options = {}) {
