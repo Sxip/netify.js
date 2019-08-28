@@ -15,9 +15,9 @@
 
 <b>Netify</b> is a [Node.js](https://nodejs.org/) module that allows you to easily create a TCP server and client.
 
-* ⚙️ Create your own protocol.
-* 🔥 Promise based.
-* ⚡️ Performant.
+- ⚙️ Create your own protocol.
+- 🔥 Promise based.
+- ⚡️ Performant.
 
 ## Getting Started
 
@@ -96,7 +96,15 @@ const { NetifyClient, Protocol: { Null } } = require('netify.js');
 
 ### Protocol
 
-**Netify** comes with premade protocols however, you have the option to extend the protocol `base` class and create your own protocol to fit your needs.
+**Netify** comes with the follow premade protocols.
+
+* Delimiter  
+  Used for delimiter based data
+
+* Null  
+  Used for data ending with `\x00`
+
+If the premade procols do not fit your needs, you have the option to extend the protocol `Base` class and create your own protocol to fit your needs.
 
 **Example** - Creating your own protocol class
 
