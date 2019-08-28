@@ -3,6 +3,3 @@
 
 # Node modules
 node_modules/
-
-# TypeScript build
-build/

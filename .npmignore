@@ -1,5 +1,5 @@
 src
-example
+examples
 .vscode/
 tsconfig.json
 yarn.lock

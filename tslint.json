@@ -1,21 +1,48 @@
 {
   "extends": [
-    "tslint:recommended",
-    "tslint-microsoft-contrib/latest"
+    "tslint-config-typings"
   ],
   "rules": {
-    "no-parameter-properties": false,
-    "no-relative-imports": false,
-    "completed-docs": false,
-    "curly": [
+    "class-name": true,
+    "indent": [
       true,
-      "as-needed"
+      "spaces",
+      2
+    ],
+    "member-ordering": [
+      true,
+      {
+        "order": [
+          "constructor",
+          "instance-field",
+          "instance-method",
+          "static-field",
+          "static-method"
+        ]
+      }
     ],
     "quotemark": [
       true,
-      "single",
-      "avoid-escape",
-      "avoid-template"
+      "single"
+    ],
+    "semicolon": [
+      true,
+      "always"
+    ],
+    "variable-name": [
+      true,
+      "check-format",
+      "allow-pascal-case",
+      "allow-leading-underscore",
+      "allow-trailing-underscore"
+    ],
+    "whitespace": [
+      true,
+      "check-branch",
+      "check-decl",
+      "check-operator",
+      "check-separator",
+      "check-type"
     ]
   }
 }
