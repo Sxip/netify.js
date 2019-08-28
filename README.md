@@ -35,7 +35,7 @@ Note: Before creating a server or client, you must define your own protocol or u
 **Example** - creating a netify server
 
 ```js
-const { NetifyClient, Protocol: { Null } } = require('netify.js');
+const { NetifyServer, Protocol: { Null } } = require('netify.js');
 
 (async () => {
   const netify = new NetifyServer({
