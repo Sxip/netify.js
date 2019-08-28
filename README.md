@@ -104,6 +104,9 @@ const { NetifyClient, Protocol: { Null } } = require('netify.js');
 * Null  
   Used for data ending with `\x00`
 
+* Chunk  
+  Used to handle data chunks.
+
 If the premade procols do not fit your needs, you have the option to extend the protocol `Base` class and create your own protocol to fit your needs.
 
 **Example** - Creating your own protocol class
