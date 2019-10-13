@@ -1,4 +1,5 @@
 declare module 'netify.js' {
+
   import { EventEmitter } from 'events';
   import { Socket, TcpSocketConnectOpts } from 'net';
 
@@ -17,10 +18,10 @@ declare module 'netify.js' {
     writeBuffer?: number;
   }
 
-  export class NetifyServer extends EventEmitter {
+  export class NetifyServer<T extends Protocol> extends EventEmitter {
     public constructor(options: NetifyServerOptions);
 
-    public connections: Set<ServerSocket>;
+    public connections: Set<ServerSocket<T>>;
 
     public useProtocol(handler: Protocol, options?: Object): void;
     public broadcast(message: string | Buffer): Promise<number[]>
@@ -28,17 +29,17 @@ declare module 'netify.js' {
     public close(): Promise<void>;
     public serve(): Promise<void>;
 
-    public on(event: 'connection', listener: (connection: NetifySocket) => any): this;
+    public on(event: 'connection', listener: (connection: NetifySocket<T>) => any): this;
     public on(event: 'error', listener: (error: Error) => any): this;
     public on(event: 'close', listener: () => any): this;
   }
 
-  export class ServerSocket extends NetifySocket { }
+  export class ServerSocket<T extends Protocol> extends NetifySocket<T> { }
 
-  export class NetifySocket extends EventEmitter {
+  export class NetifySocket<T extends Protocol> extends EventEmitter {
     public constructor(socket: Socket);
 
-    public protocol: Protocol;
+    public protocol: T;
 
     public write(message: string | Buffer): void;
     public flush(): Promise<number>;
@@ -51,11 +52,11 @@ declare module 'netify.js' {
     public on(event: 'close', listener: () => any): this;
   }
 
-  export class NetifyClient extends NetifySocket {
+  export class NetifyClient<T extends Protocol> extends NetifySocket<T> {
     public constructor(options: NetifyClientOptions);
 
     public connect(): Promise<void>;
-    public useProtocol(handler: Protocol, options?: Object): void;
+    public useProtocol(handler: new (...args: any[]) => T, options?: Object): this;
   }
 
   export class ByteBuffer {
@@ -147,5 +148,17 @@ declare module 'netify.js' {
 
     protected push(message: any): void;
     protected abstract chunk(bytes: number): void;
+  }
+
+  export class ChunkProtocol extends Protocol {
+    protected chunk(bytes: number): void;
+  }
+
+  export class DelimiterProtocol extends Protocol {
+    protected chunk(bytes: number): void;
+  }
+
+  export class NullProtocol extends Protocol {
+    protected chunk(bytes: number): void;
   }
 }

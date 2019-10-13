@@ -1,7 +1,7 @@
 {
   "name": "netify.js",
   "description": "Netify is a Node.js module that allows you to easily create a TCP server and client.",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "scripts": {
     "lint": "yarn eslint ./src && yarn tslint ./src/index.d.ts"
   },
@@ -23,6 +23,7 @@
     "client"
   ],
   "devDependencies": {
+    "dts-gen": "^0.5.8",
     "eslint": "^6.2.2",
     "tslint-config-typings": "^0.3.1",
     "typescript": "^3.5.3"

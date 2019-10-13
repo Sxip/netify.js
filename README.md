@@ -35,12 +35,12 @@ Note: Before creating a server or client, you must define your own protocol or u
 **Example** - creating a netify server
 
 ```js
-const { NetifyServer, Protocol: { Null } } = require('netify.js');
+const { NetifyServer, NullProtocol } = require('netify.js');
 
 (async () => {
   const netify = new NetifyServer({
     port: 8080,
-  }).useProtocol(Null);
+  }).useProtocol(NullProtocol);
 
   netify.on('connection', async connection => {
     console.info(`New connection!`);
@@ -67,13 +67,13 @@ const { NetifyServer, Protocol: { Null } } = require('netify.js');
 **Example** - creating a netify client
 
 ```js
-const { NetifyClient, Protocol: { Null } } = require('netify.js');
+const { NetifyClient, NullProtocol } = require('netify.js');
 
 (async () => {
   const netify = new NetifyClient({
     host: '127.0.0.1',
     port: 8080,
-  }).useProtocol(Null);
+  }).useProtocol(NullProtocol);
 
   netify.on('received', message => {
     console.info(`Recieved ${message}`);
@@ -112,9 +112,9 @@ If the premade procols do not fit your needs, you have the option to extend the 
 **Example** - Creating your own protocol class
 
 ```js
-const { Protocol: { Base } } = require('netify.js');
+const { Protocol } = require('netify.js');
 
-class ExampleProtocol extends Base {
+class ExampleProtocol extends Protocol {
   constructor({ readBufferSize = 200, writeBufferSize = 200 } = {}) {
     super({
       readBufferSize,

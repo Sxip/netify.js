@@ -10,7 +10,22 @@ module.exports = {
   NetifyClient: require('./NetifyClient'),
 
   /**
-   * @returns {any}
+   * @returns {Protocol}
    */
-  Protocol: require('./network/protocol'),
+  Protocol: require('./Base'),
+
+  /**
+  * @returns {DelimiterProtocol}
+  */
+  DelimiterProtocol: require('./common/DelimiterProtocol'),
+
+  /**
+   * @returns {NullProtocol}
+   */
+  NullProtocol: require('./common/NullProtocol'),
+
+  /**
+   * @returns {ChunkProtocol}
+   */
+  ChunkProtocol: require('./common/ChunkProtocol'),
 };
