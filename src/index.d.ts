@@ -23,7 +23,7 @@ declare module 'netify.js' {
 
     public connections: Set<ServerSocket<T>>;
 
-    public useProtocol(handler: Protocol, options?: Object): void;
+    public useProtocol(handler: new (...args: any[]) => T, options?: Object): this;
     public broadcast(message: string | Buffer): Promise<number[]>
     public closeConnections(): Promise<any[]>;
     public close(): Promise<void>;
