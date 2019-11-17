@@ -15,9 +15,9 @@
 
 <b>Netify</b> is a [Node.js](https://nodejs.org/) module that allows you to easily create a TCP server and client.
 
-- ⚙️ Create your own protocol.
-- ⛓️ Promise based.
-- ⚡️ Performant.
+- ⚙️ Create your own protocol
+- ⛓️ Promise based
+- ⚡️ Performant
 
 ## Getting Started
 
