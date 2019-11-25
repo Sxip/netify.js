@@ -14,7 +14,7 @@ Object.assign(ByteBuffer.prototype, {
   write(buffer) {
     this.ensureSize(buffer.length);
 
-    buffer.copy(this._buffer, this._offset);
+    buffer.copy(this._buffer, this._end);
     this._end += buffer.length;
   },
 
