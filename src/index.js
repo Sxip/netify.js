@@ -12,20 +12,20 @@ module.exports = {
   /**
    * @returns {Protocol}
    */
-  Protocol: require('./Base'),
+  Protocol: require('./network/protocol/Base'),
 
   /**
   * @returns {DelimiterProtocol}
   */
-  DelimiterProtocol: require('./common/DelimiterProtocol'),
+  DelimiterProtocol: require('./network/protocol/common/DelimiterProtocol'),
 
   /**
    * @returns {NullProtocol}
    */
-  NullProtocol: require('./common/NullProtocol'),
+  NullProtocol: require('./network/protocol/common/NullProtocol'),
 
   /**
    * @returns {ChunkProtocol}
    */
-  ChunkProtocol: require('./common/ChunkProtocol'),
+  ChunkProtocol: require('./network/protocol/common/ChunkProtocol'),
 };
