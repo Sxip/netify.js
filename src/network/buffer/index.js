@@ -1,3 +1,5 @@
+'use strict';
+
 const ByteBuffer = require('./Base');
 
 require('./Search');

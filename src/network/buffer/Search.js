@@ -1,3 +1,5 @@
+'use strict';
+
 const ByteBuffer = require('./Base');
 
 Object.assign(ByteBuffer.prototype, {
@@ -12,6 +14,6 @@ Object.assign(ByteBuffer.prototype, {
   },
 
   contains(value) {
-    return this.indexOf(value) !== -1;
+    return this.indexOf(value) != -1;
   },
 });

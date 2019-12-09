@@ -1,3 +1,5 @@
+'use strict';
+
 class ByteBuffer {
   constructor(size) {
     size = size || ByteBuffer.DefaultSize;
@@ -7,21 +9,13 @@ class ByteBuffer {
     this._end = 0;
   }
 
-  static get DefaultSize() {
-    return 256;
-  }
-
-  static get DefaultEncoding() {
-    return 'utf-8';
-  }
-
   get offset() {
     return this._offset;
   }
 
   set offset(value) {
-    if (value < 0) throw new RangeError('Out of range.');
-    if (value > this._end) throw new RangeError('Out of range.');
+    if (value < 0) throw RangeError('Index out of range');
+    if (value > this._end) throw RangeError('Index out of range');
 
     this._offset = value;
   }
@@ -31,8 +25,8 @@ class ByteBuffer {
   }
 
   set end(value) {
-    if (value < this._end) throw new RangeError('Out of range.');
-    if (!(value < this._buffer.length)) throw new RangeError('Out of range.');
+    if (value < this._end) throw RangeError('Index out of range');
+    if (!(value < this._buffer.length)) throw RangeError('Index out of range');
 
     this._end = value;
   }
@@ -67,7 +61,9 @@ class ByteBuffer {
   }
 
   drain(length) {
-    if (length > this.length) throw new RangeError('Out of range.');
+    if (length > this.length) throw RangeError('Length out of range');
+
+    length = length || 0;
 
     this._buffer.copy(this._buffer, 0, this._offset + length, this._end);
     this._end = this.length - length;
@@ -80,7 +76,7 @@ class ByteBuffer {
     offset = offset || 0;
     end = end || length;
 
-    if (end > length) throw new RangeError('Out of range.');
+    if (end > length) throw RangeError('Length out of range');;
 
     return this._buffer.slice(this._offset + offset, this._offset + end);
   }
@@ -89,5 +85,8 @@ class ByteBuffer {
     return this._buffer.slice(this._offset + offset, this._offset + end);
   }
 }
+
+ByteBuffer.DefaultSize = 256;
+ByteBuffer.DefaultEncoding = 'utf8';
 
 module.exports = ByteBuffer;

@@ -1,13 +1,18 @@
+'use strict';
+
 const ByteBuffer = require('./Base');
 
 Object.assign(ByteBuffer.prototype, {
   ensureSize(addition) {
-    if (this.capacity - this.end < addition) {
+    if (this._buffer.length < this._end + addition) {
       const oldBuffer = this._buffer;
+      const newBuffer = Buffer.allocUnsafe(this._buffer.length * 2 + addition);
 
-      // eslint-disable-next-line no-mixed-operators
-      this._buffer = Buffer.allocUnsafe(this.capacity * 2 + addition);
-      oldBuffer.copy(this._buffer, this._offset, this._offset, this._end);
+      oldBuffer.copy(newBuffer, 0, this._offset, this._end);
+
+      this._buffer = newBuffer;
+      this._end = this._end - this._offset;
+      this._offset = 0;
     }
   },
 

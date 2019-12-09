@@ -1,8 +1,10 @@
+'use strict';
+
 const ByteBuffer = require('./Base');
 
 Object.assign(ByteBuffer.prototype, {
   ensureRead(length) {
-    if (length > this.length) throw new RangeError('Out of range.');
+    if (length > this.length) throw RangeError('Length out of range');
   },
 
   read(length) {
@@ -36,6 +38,16 @@ Object.assign(ByteBuffer.prototype, {
     return this.readUntilByte(0x00);
   },
 
+  readString(length, encoding) {
+    encoding = encoding || 'utf8';
+    this.ensureRead(length);
+
+    const message = this._buffer.toString(encoding, this._offset, this._offset + length);
+    this._offset += length;
+
+    return message;
+  },
+
   readBigInt64BE() {
     this.ensureRead(8);
 
@@ -45,7 +57,7 @@ Object.assign(ByteBuffer.prototype, {
     return value;
   },
 
-  readBigInt64LE() {
+  readBigInt64LE() {j
     this.ensureRead(8);
 
     const value = this._buffer.readBigInt64LE(this._offset);
