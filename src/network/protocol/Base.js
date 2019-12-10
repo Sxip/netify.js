@@ -1,3 +1,5 @@
+'use strict';
+
 const ByteBuffer = require('../buffer');
 
 class Protocol {

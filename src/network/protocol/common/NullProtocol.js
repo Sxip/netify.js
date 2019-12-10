@@ -1,3 +1,5 @@
+'use strict';
+
 const Protocol = require('../Base');
 
 class NullProtocol extends Protocol {

@@ -1,3 +1,5 @@
+'use strict';
+
 const NetifySocket = require('./network/sockets/NetifySocket');
 const Protocol = require('./network/protocol/Base');
 

@@ -1,3 +1,5 @@
+'use strict';
+
 const NetifySocket = require('./NetifySocket');
 
 class ServerSocket extends NetifySocket {

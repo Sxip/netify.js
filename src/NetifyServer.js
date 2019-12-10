@@ -1,3 +1,5 @@
+'use strict';
+
 const { EventEmitter } = require('events');
 const { Server } = require('net');
 const ConnectionManager = require('./network/ConnectionManager');

@@ -1,3 +1,5 @@
+'use strict';
+
 const ServerSocket = require('./sockets/ServerSocket');
 
 class ConnectionManager {
