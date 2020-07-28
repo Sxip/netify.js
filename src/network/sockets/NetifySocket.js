@@ -45,9 +45,10 @@ class NetifySocket extends EventEmitter {
    * @returns {this}
    * @public
    */
-  setProtocol({ Handler, options }) {
+  setProtocol({ Handler, options = {} }) {
     this.protocol = new Handler(options)
       .init(this);
+
     return this;
   }
 

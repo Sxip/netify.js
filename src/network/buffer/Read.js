@@ -10,7 +10,6 @@ Object.assign(ByteBuffer.prototype, {
   read(length) {
     const buffer = this.slice(0, length);
     this._offset += length;
-
     return buffer;
   },
 
@@ -20,7 +19,6 @@ Object.assign(ByteBuffer.prototype, {
 
     const buffer = this.sliceNoCheck(0, index);
     this._offset += index + value.length;
-
     return buffer;
   },
 
@@ -30,7 +28,6 @@ Object.assign(ByteBuffer.prototype, {
 
     const buffer = this.sliceNoCheck(0, index);
     this._offset += index + 1;
-
     return buffer;
   },
 
@@ -44,7 +41,6 @@ Object.assign(ByteBuffer.prototype, {
 
     const message = this._buffer.toString(encoding, this._offset, this._offset + length);
     this._offset += length;
-
     return message;
   },
 
@@ -53,7 +49,6 @@ Object.assign(ByteBuffer.prototype, {
 
     const value = this._buffer.readBigInt64BE(this._offset);
     this._offset += 8;
-
     return value;
   },
 
@@ -62,7 +57,6 @@ Object.assign(ByteBuffer.prototype, {
 
     const value = this._buffer.readBigInt64LE(this._offset);
     this._offset += 8;
-
     return value;
   },
 
@@ -71,7 +65,6 @@ Object.assign(ByteBuffer.prototype, {
 
     const value = this._buffer.readBigUInt64BE(this._offset);
     this._offset += 8;
-
     return value;
   },
 
@@ -80,7 +73,6 @@ Object.assign(ByteBuffer.prototype, {
 
     const value = this._buffer.readBigUInt64LE(this._offset);
     this._offset += 8;
-
     return value;
   },
 
@@ -89,7 +81,6 @@ Object.assign(ByteBuffer.prototype, {
 
     const value = this._buffer.readDoubleBE(this._offset);
     this._offset += 8;
-
     return value;
   },
 
@@ -98,7 +89,6 @@ Object.assign(ByteBuffer.prototype, {
 
     const value = this._buffer.readDoubleLE(this._offset);
     this._offset += 8;
-
     return value;
   },
 
@@ -107,7 +97,6 @@ Object.assign(ByteBuffer.prototype, {
 
     const value = this._buffer.readFloatBE(this._offset);
     this._offset += 4;
-
     return value;
   },
 
@@ -116,7 +105,6 @@ Object.assign(ByteBuffer.prototype, {
 
     const value = this._buffer.readFloatLE(this._offset);
     this._offset += 4;
-
     return value;
   },
 
@@ -125,7 +113,6 @@ Object.assign(ByteBuffer.prototype, {
 
     const value = this._buffer.readInt8(this._offset);
     this._offset += 1;
-
     return value;
   },
 
@@ -134,7 +121,6 @@ Object.assign(ByteBuffer.prototype, {
 
     const value = this._buffer.readUInt8(this._offset);
     this._offset += 1;
-
     return value;
   },
 
@@ -143,7 +129,6 @@ Object.assign(ByteBuffer.prototype, {
 
     const value = this._buffer.readInt16BE(this._offset);
     this._offset += 2;
-
     return value;
   },
 
@@ -152,7 +137,6 @@ Object.assign(ByteBuffer.prototype, {
 
     const value = this._buffer.readInt16LE(this._offset);
     this._offset += 2;
-
     return value;
   },
 
@@ -161,7 +145,6 @@ Object.assign(ByteBuffer.prototype, {
 
     const value = this._buffer.readUInt16BE(this._offset);
     this._offset += 2;
-
     return value;
   },
 
@@ -170,7 +153,6 @@ Object.assign(ByteBuffer.prototype, {
 
     const value = this._buffer.readUInt16LE(this._offset);
     this._offset += 2;
-
     return value;
   },
 
@@ -179,7 +161,6 @@ Object.assign(ByteBuffer.prototype, {
 
     const value = this._buffer.readInt32BE(this._offset);
     this._offset += 4;
-
     return value;
   },
 
@@ -188,7 +169,6 @@ Object.assign(ByteBuffer.prototype, {
 
     const value = this._buffer.readInt32LE(this._offset);
     this._offset += 4;
-
     return value;
   },
 
@@ -197,7 +177,6 @@ Object.assign(ByteBuffer.prototype, {
 
     const value = this._buffer.readUInt32BE(this._offset);
     this._offset += 4;
-
     return value;
   },
 
@@ -206,7 +185,6 @@ Object.assign(ByteBuffer.prototype, {
 
     const value = this._buffer.readUInt32LE(this._offset);
     this._offset += 4;
-
     return value;
   },
 
@@ -215,7 +193,6 @@ Object.assign(ByteBuffer.prototype, {
 
     const value = this._buffer.readIntBE(this._offset);
     this._offset += 6;
-
     return value;
   },
 
@@ -224,7 +201,6 @@ Object.assign(ByteBuffer.prototype, {
 
     const value = this._buffer.readIntLE(this._offset);
     this._offset += 6;
-
     return value;
   },
 
@@ -233,7 +209,6 @@ Object.assign(ByteBuffer.prototype, {
 
     const value = this._buffer.readUIntBE(this._offset);
     this._offset += 6;
-
     return value;
   },
 
@@ -242,7 +217,6 @@ Object.assign(ByteBuffer.prototype, {
 
     const value = this._buffer.readUIntLE(this._offset);
     this._offset += 6;
-
     return value;
   },
 });

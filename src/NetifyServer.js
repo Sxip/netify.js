@@ -4,6 +4,7 @@ const { EventEmitter } = require('events');
 const { Server } = require('net');
 const ConnectionManager = require('./network/ConnectionManager');
 const Protocol = require('./network/protocol/Base');
+const ChunkProtocol = require('./network/protocol/common/ChunkProtocol');
 
 class NetifyServer extends EventEmitter {
   constructor(options = {}) {
@@ -36,7 +37,10 @@ class NetifyServer extends EventEmitter {
      * @type {object}
      * @private
      */
-    this._netifyProtocol = null;
+    this._netifyProtocol = {
+      Handler: null,
+      options: {}
+    };
   }
 
   /**
@@ -98,7 +102,7 @@ class NetifyServer extends EventEmitter {
   async serve() {
     await new Promise((resolve, reject) => {
       if (this._server) reject(new Error('The server has already been instantiated.'));
-      if (!this._netifyProtocol.Handler) reject(new Error('No protocol has been set.'));
+      if (!this._netifyProtocol.Handler) this._netifyProtocol.Handler = ChunkProtocol
 
       this._server = new Server();
 

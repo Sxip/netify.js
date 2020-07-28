@@ -77,7 +77,6 @@ class ByteBuffer {
     end = end || length;
 
     if (end > length) throw RangeError('Length out of range');;
-
     return this._buffer.slice(this._offset + offset, this._offset + end);
   }
 

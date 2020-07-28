@@ -2,6 +2,7 @@
 
 const NetifySocket = require('./network/sockets/NetifySocket');
 const Protocol = require('./network/protocol/Base');
+const ChunkProtocol = require('./network/protocol/common/ChunkProtocol')
 
 class NetifyClient extends NetifySocket {
   constructor(options = {}) {
@@ -39,7 +40,7 @@ class NetifyClient extends NetifySocket {
    * @public
    */
   async connect() {
-    if (!this.protocol) throw new Error('No protocol has been set.');
+    if (!this.protocol) this.setProtocol({ Handler: ChunkProtocol })
 
     const { host, port } = this.options;
     await super.connect({ host, port });
