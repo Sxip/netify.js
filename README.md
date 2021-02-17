@@ -6,7 +6,7 @@
   <br />
   <p>
     <a href="https://www.npmjs.com/package/netify.js"><img src="https://img.shields.io/npm/v/netify.js.svg?style=flat&color=brightgreen" alt="NPM version" /></a>
-    <a href="https://www.npmjs.com/package/netify.js"><img src="https://img.shields.io/npm/dw/netify.js" alt="NPM downloads" /></a>
+    <a href="https://www.npmjs.com/package/netify.js"><img src="https://img.shields.io/npm/dt/netify.js" alt="NPM downloads" /></a>
     <a href="#"><img src="https://img.shields.io/npm/l/netify.js" alt="Neitfy license" /></a>
   </p>
 </div>
@@ -34,7 +34,7 @@ Note: Before creating a server or client, you must define your own protocol or u
 
 **Example** - creating a netify server
 
-```js
+```ts
 const { NetifyServer, NullProtocol } = require('netify.js');
 
 (async () => {
@@ -114,7 +114,7 @@ If the premade procols do not fit your needs, you have the option to extend the 
 ```js
 const { Protocol } = require('netify.js');
 
-class ExampleProtocol extends Protocol {
+class class ExampleProtocol extends Protocol {
   constructor({ readBufferSize = 200, writeBufferSize = 200 } = {}) {
     super({
       readBufferSize,

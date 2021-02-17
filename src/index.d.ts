@@ -23,7 +23,7 @@ declare module 'netify.js' {
 
     public connections: Set<ServerSocket<T>>;
 
-    public useProtocol(handler: new (...args: any[]) => T, options?: Object): this;
+    public useProtocol<T>(handler: new (...args: any[]) => T, options?: Object): this;
     public broadcast(message: string | Buffer): Promise<number[]>
     public closeConnections(): Promise<any[]>;
     public close(): Promise<void>;
@@ -56,7 +56,7 @@ declare module 'netify.js' {
     public constructor(options: NetifyClientOptions);
 
     public connect(): Promise<void>;
-    public useProtocol(handler: new (...args: any[]) => T, options?: Object): this;
+    public useProtocol<T>(handler: new (...args: any[]) => T, options?: Object): this;
   }
 
   export class ByteBuffer {
@@ -138,7 +138,7 @@ declare module 'netify.js' {
   }
 
   export abstract class Protocol {
-    public constructor(options: ProtocolOptions);
+    public constructor(options?: ProtocolOptions);
 
     public reader: ByteBuffer;
     public writer: ByteBuffer;
