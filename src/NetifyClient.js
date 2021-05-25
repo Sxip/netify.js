@@ -8,6 +8,7 @@ class NetifyClient extends NetifySocket {
   constructor(options = {}) {
     if (!options.host) throw new Error('No host has been specified.');
     if (!options.port) throw new Error('No port has been specified.');
+    if (!options.rejectUnauthorized) options.rejectUnauthorized = false
     super();
 
     /**
@@ -42,8 +43,8 @@ class NetifyClient extends NetifySocket {
   async connect() {
     if (!this.protocol) this.setProtocol({ Handler: ChunkProtocol })
 
-    const { host, port } = this.options;
-    await super.connect({ host, port });
+    const { host, port, rejectUnauthorized } = this.options;
+    await super.connect({ host, port, rejectUnauthorized });
 
     this.socket.on('data', this.onData.bind(this));
     this.socket.on('error', this.onError.bind(this));
