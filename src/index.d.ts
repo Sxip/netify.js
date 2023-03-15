@@ -11,6 +11,7 @@ declare module 'netify.js' {
   export interface NetifyClientOptions {
     host: string;
     port: number;
+    tls: boolean;
   }
 
   export interface ProtocolOptions {

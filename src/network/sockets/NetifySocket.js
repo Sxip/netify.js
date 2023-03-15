@@ -2,9 +2,10 @@
 
 const { EventEmitter } = require('events');
 const { Socket } = require('net');
+const { TLSSocket } = require('tls');
 
 class NetifySocket extends EventEmitter {
-  constructor(socket) {
+  constructor(socket, options) {
     super();
 
     /**
@@ -12,7 +13,7 @@ class NetifySocket extends EventEmitter {
     * @type {net.Socket}
     * @public
     */
-    this.socket = socket || new Socket();
+    this.socket = socket || options.tls ? new TLSSocket() : new Socket();
 
     /**
      * The protocol of this netify socket

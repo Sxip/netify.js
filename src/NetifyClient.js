@@ -2,13 +2,16 @@
 
 const NetifySocket = require('./network/sockets/NetifySocket');
 const Protocol = require('./network/protocol/Base');
-const ChunkProtocol = require('./network/protocol/common/ChunkProtocol')
+const ChunkProtocol = require('./network/protocol/common/ChunkProtocol');
 
 class NetifyClient extends NetifySocket {
   constructor(options = {}) {
     if (!options.host) throw new Error('No host has been specified.');
     if (!options.port) throw new Error('No port has been specified.');
-    super();
+    if (!options.tls) options.tls = false;
+    if (options.tls && !options.rejectUnauthorized) options.rejectUnauthorized = false;
+
+    super(null, options);
 
     /**
      * The options the server was instantiated with
@@ -40,10 +43,10 @@ class NetifyClient extends NetifySocket {
    * @public
    */
   async connect() {
-    if (!this.protocol) this.setProtocol({ Handler: ChunkProtocol })
+    if (!this.protocol) this.setProtocol({ Handler: ChunkProtocol });
 
-    const { host, port } = this.options;
-    await super.connect({ host, port });
+    const { host, port, rejectUnauthorized } = this.options;
+    await super.connect({ host, port, rejectUnauthorized });
 
     this.socket.on('data', this.onData.bind(this));
     this.socket.on('error', this.onError.bind(this));
