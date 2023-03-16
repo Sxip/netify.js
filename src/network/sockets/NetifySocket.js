@@ -5,7 +5,8 @@ const { Socket } = require('net');
 const { TLSSocket } = require('tls');
 
 class NetifySocket extends EventEmitter {
-  constructor(socket, options) {
+  constructor(socket, options = {}) {
+    // eslint-disable-next-line no-unneeded-ternary
     super();
 
     /**
@@ -13,7 +14,14 @@ class NetifySocket extends EventEmitter {
     * @type {net.Socket}
     * @public
     */
-    this.socket = socket || options.tls ? new TLSSocket() : new Socket();
+    if (socket) {
+      this.socket = socket;
+    } else if (!this.socket && options.tls) {
+      console.log('valid');
+      this.socket = new TLSSocket();
+    } else if (!this.socket && !options.tls) {
+      this.socket = new Socket();
+    }
 
     /**
      * The protocol of this netify socket
